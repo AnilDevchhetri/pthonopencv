@@ -19,6 +19,35 @@ def translate(img, x, y):
 # y --> donw
 
 translate = translate(img, 100, 100)
-cv.imshow("translate", translate)
+# cv.imshow("translate", translate)
+
+
+# Rotation
+def rotate(img, angle, rotPoint=None):
+    (height, width) = img.shape[:2]
+
+    if rotPoint is None:
+        rotPoint = (width // 2, height // 2)  # make it center
+
+    rotMat = cv.getRotationMatrix2D(rotPoint, angle, 1.0)
+    dimensions = (width, height)
+
+    return cv.warpAffine(img, rotMat, dimensions)
+
+
+# roate image by 45 diegree
+rotated = rotate(img, 45)
+# cv.imshow("Rotated", rotated)
+
+
+# resizing
+resized = cv.resize(img, (500, 500), interpolation=cv.INTER_CUBIC)
+# cv.imshow("resize", resized)
+
+# fliping image
+flip = cv.flip(img, -1)
+cv.imshow("flip", flip)
+
+print(img)
 
 cv.waitKey(0)
